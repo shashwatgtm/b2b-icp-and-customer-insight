@@ -1,7 +1,7 @@
 {
   "name": "b2b-icp-and-customer-insight",
   "displayName": "B2B ICP and Customer Insight",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Review the ICP you already have against today's customers, deals and figures, with metric gaps computed by script and every proposed change a hypothesis with its test; plan customer interviews that test your own hypotheses and synthesise many interviews with each item counted once per interview; build a lead or account fit scoring model with labelled example weights you can change; set buying role hypotheses with validation questions; and check product market fit metrics against your own targets.",
   "author": {
     "name": "Shashwat Ghosh",
@@ -10,8 +10,18 @@
   "homepage": "https://tools.gtmhelix.com/plugins/b2b-icp-and-customer-insight/",
   "repository": "https://github.com/shashwatgtm/b2b-icp-and-customer-insight",
   "license": "MIT",
-  "documentationUrl": "https://github.com/shashwatgtm/b2b-icp-and-customer-insight#readme",
-  "supportUrl": "https://github.com/shashwatgtm/b2b-icp-and-customer-insight/issues",
-  "privacyPolicyUrl": "https://tools.gtmhelix.com/privacy/",
-  "keywords": ["icp", "ideal-customer-profile", "customer-interviews", "customer-research", "interview-synthesis", "lead-scoring", "account-scoring", "buying-roles", "champion", "product-marketing", "revops", "b2b"]
+  "keywords": [
+    "icp",
+    "ideal-customer-profile",
+    "customer-interviews",
+    "customer-research",
+    "interview-synthesis",
+    "lead-scoring",
+    "account-scoring",
+    "buying-roles",
+    "champion",
+    "product-marketing",
+    "revops",
+    "b2b"
+  ]
 }
