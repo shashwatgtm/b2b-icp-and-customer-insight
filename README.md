@@ -8,7 +8,7 @@ ICP and customer insight skills for B2B teams, built by Shashwat Ghosh, Helix GT
 - **buying-role-hypotheses**: champion, signer and evaluator hypotheses with validation questions, by role.
 - **pmf-check**: product market fit metrics compared only with your own targets; no benchmark and no stage label.
 
-Version 1.0.0. More plugins by Helix GTM Consulting: https://tools.gtmhelix.com/plugins/
+Version 1.0.1. More plugins by Helix GTM Consulting: https://tools.gtmhelix.com/plugins/
 
 ## Install
 
@@ -31,7 +31,7 @@ claude plugin install b2b-icp-and-customer-insight@b2b-icp-and-customer-insight
 
 ## Privacy
 
-This plugin sends no data to Helix GTM Consulting and runs no server. It keeps no account, no log and no copy of your work. The Python scripts read only what you give them, use no network and write no files. One hook, in Claude Code only (hooks/delivery_check.py, a Stop hook), checks that a skill's final reply is the text its claim ledger checked; it reads the hook input and the session transcript on your computer, writes one small counter file in a folder of your own in the system temporary folder, and sends nothing. The plugin's own README gives the details.
+This plugin sends no data to Helix GTM Consulting and runs no server. It keeps no account, no log and no copy of your work. The Python scripts read only what you give them, use no network and write no files.
 
 ## License
 
