@@ -1,7 +1,7 @@
 {
   "name": "b2b-icp-and-customer-insight",
   "displayName": "B2B ICP and Customer Insight",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Review the ICP you already have against today's customers, deals and figures, with metric gaps computed by script and every proposed change a hypothesis with its test; plan customer interviews that test your own hypotheses and synthesise many interviews with each item counted once per interview; build a lead or account fit scoring model with labelled example weights you can change; set buying role hypotheses with validation questions; and check product market fit metrics against your own targets.",
   "author": {
     "name": "Shashwat Ghosh",
