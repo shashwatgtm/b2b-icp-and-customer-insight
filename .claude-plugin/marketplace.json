@@ -9,7 +9,7 @@
     {
       "name": "b2b-icp-and-customer-insight",
       "source": "./plugins/b2b-icp-and-customer-insight",
-      "version": "1.0.3",
+      "version": "1.0.4",
       "description": "Review and revise the ICP you have against your customers, deals and figures; plan and synthesise customer interviews that test your hypotheses; build a fit scoring model with labelled example weights; and set buying role hypotheses with validation questions."
     }
   ]
