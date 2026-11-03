@@ -1,0 +1,65 @@
+{
+  "skills": [
+    {
+      "repo": "b2b-icp-and-customer-insight",
+      "path": "plugins/b2b-icp-and-customer-insight/skills/pmf-check/SKILL.md",
+      "before_sha256": "0d68a83a01da682e77f56c791f777435d731b5136d86e709127a083d759a457c",
+      "after_sha256": "0cb65426a383c12d791e23ff93a6b0bad9e1120bf405385b8c4ae7d047949b3d",
+      "frontmatter_sha256": "469b685ea1249ab6051e2897bb8546f7843055e9eabc2a48e556098bff4f0e43",
+      "reference_sha256": "48e5917aecb374a4dfd467a5a74a066c1061c275d6110cc51b36a4860fe0bd8e"
+    },
+    {
+      "repo": "b2b-icp-and-customer-insight",
+      "path": "plugins/b2b-icp-and-customer-insight/skills/customer-interviews/SKILL.md",
+      "before_sha256": "db2f92c4bc66bac657eba76e3d47efe3c711a7f57a41b402a1236a4da87e7058",
+      "after_sha256": "19524517f7a41f9a30e36076b5fe868c98cec49b05cb1c0be446df339dbf2804",
+      "frontmatter_sha256": "2fa4f4c5a87d6a0729aa59d12c54e74b03105b000d675a11f5fde9cdc37ed0cc",
+      "reference_sha256": "48e5917aecb374a4dfd467a5a74a066c1061c275d6110cc51b36a4860fe0bd8e"
+    },
+    {
+      "repo": "b2b-icp-and-customer-insight",
+      "path": "plugins/b2b-icp-and-customer-insight/skills/lead-scoring-model/SKILL.md",
+      "before_sha256": "98308011e9d10f423cbabcfb36198ac3fe59aaf79512f4fb1a23e3b843e49d8b",
+      "after_sha256": "b87dcc9280b34f8e221f172901e507c7adc1cfb0fc7d4d8407356e1cc785800d",
+      "frontmatter_sha256": "2d9fa0a36cd57b9bb7386b7c7b7b4eb4b6d80ea692415f7e319850bad6c3febd",
+      "reference_sha256": "48e5917aecb374a4dfd467a5a74a066c1061c275d6110cc51b36a4860fe0bd8e"
+    },
+    {
+      "repo": "b2b-icp-and-customer-insight",
+      "path": "plugins/b2b-icp-and-customer-insight/skills/icp-review/SKILL.md",
+      "before_sha256": "af7ecfce006d0d633573763ba46e7f3e3ec5b60de0ce8a57fd25b645a5931e49",
+      "after_sha256": "b49e4190993390a72c6e93f1a78cd4863a952b415ef37315adfada729a7bc7bb",
+      "frontmatter_sha256": "83197e10421486eace20b23b468540738277dee2731d15dc6b0e65f57befb6e4",
+      "reference_sha256": "48e5917aecb374a4dfd467a5a74a066c1061c275d6110cc51b36a4860fe0bd8e"
+    },
+    {
+      "repo": "b2b-icp-and-customer-insight",
+      "path": "plugins/b2b-icp-and-customer-insight/skills/buying-role-hypotheses/SKILL.md",
+      "before_sha256": "389733b0d910db33a348669f89932a648f243815b76c875781950d84a7091157",
+      "after_sha256": "49d38cb493320a6298548bda7bedddccf04703358c9c3220a141bed6dbeed9ea",
+      "frontmatter_sha256": "c3a6ee78282043da1788a358e0056b20dcbbe664a8cd42a962da6ea435067cc3",
+      "reference_sha256": "48e5917aecb374a4dfd467a5a74a066c1061c275d6110cc51b36a4860fe0bd8e"
+    }
+  ],
+  "tools": {
+    "alpha": [
+      "gtm_consultation",
+      "epic_audit",
+      "generate_roadmap"
+    ],
+    "revenue": [
+      "account_plan_builder",
+      "deal_strategy_coach",
+      "discovery_question_bank",
+      "roi_business_case_builder",
+      "mutual_action_plan_generator",
+      "win_loss_analyzer",
+      "proposal_section_writer",
+      "email_sequence_generator",
+      "demo_script_builder",
+      "pricing_negotiation_guide",
+      "champion_enablement_kit",
+      "competitive_trap_setter"
+    ]
+  }
+}
