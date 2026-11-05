@@ -1,6 +1,8 @@
 # B2B ICP and Customer Insight
 
-ICP and customer insight skills for B2B teams, built by Shashwat Ghosh, Helix GTM Consulting. It reviews and revises an ICP you already have; it does not build account lists.
+ICP and customer insight skills for B2B founders, product marketers, RevOps and demand generation leads, built by Shashwat Ghosh, Helix GTM Consulting. They help you decide whether you sell to the right customers, how your ICP should change, who champions and signs, which leads fit best and how far you are from your own product market fit targets. You give them your ICP, customers, deals, interview notes or metrics; you get a reviewed ICP, interview guides and synthesis, a scoring model, role hypotheses or a metrics check. It reviews and revises an ICP you already have; it does not build account lists.
+
+This plugin runs in Claude Code and Claude Cowork. The same skills are also bundled in the Helix GTM Suite for Gemini CLI and Antigravity: https://github.com/shashwatgtm/helix-gtm-suite
 
 - **icp-review**: today's customers against your ICP, metric gaps by script with labelled example bands, and proposed ICP changes from wins, losses and market changes, each a hypothesis with its CRM check.
 - **customer-interviews**: interview guides that test your own hypotheses, and synthesis across many interviews with each item counted once per interview.

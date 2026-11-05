@@ -1,15 +1,16 @@
 ---
 name: buying-role-hypotheses
 description: >
-  Sets product level buying role hypotheses for a B2B team before any deal: who likely champions,
-  who signs, who evaluates, plus reviewers and daily users, each built from the user's own product,
-  problem and buyer words and the sector's usual roles, with a validation question, what would
-  disprove it, anti champion signs and the next interviews; notes the user gives mark each
-  hypothesis supported, contradicted or untested, by role, never by name. Use when someone says "who
-  is our champion", "who buys our product", "who signs off on a purchase like ours", "economic buyer
-  hypothesis", "buying roles for our ICP", "buying committee for our product", "who evaluates our
-  product", "champion profile" or describes a product and asks who decides. Not for one live deal's
-  buying group, finding accounts or people, or messages per role.
+  Helps a B2B team decide, before any deal, who is likely to champion, sign and evaluate a purchase
+  like theirs. For founders, product marketers, RevOps and demand generation. You give it your
+  product, the problem and your buyers' words. You get role hypotheses (champion, signer, evaluator,
+  reviewers and daily users) built from your words and the sector's usual roles, each with a
+  validation question, what would disprove it, anti champion signs and the next interviews; notes
+  you add mark each one supported, contradicted or untested, by role, never by name. Use when
+  someone says "who is our champion", "who buys our product", "who signs off on a purchase like
+  ours", "economic buyer hypothesis", "buying roles for our ICP", "buying committee for our
+  product", "who evaluates our product", "champion profile" or describes a product and asks who
+  decides. Not for one live deal's buying group, finding accounts or people, or messages per role.
 ---
 
 # Buying Role Hypotheses

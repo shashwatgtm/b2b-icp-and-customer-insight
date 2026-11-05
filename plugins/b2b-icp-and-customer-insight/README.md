@@ -1,6 +1,6 @@
 # B2B ICP and Customer Insight
 
-Five skills for B2B founders, product marketers, RevOps and demand generation leads who need to know who their best customers really are, what those customers say, and how their ideal customer profile (ICP) should change. Every skill works from your own customers, deals, interviews and figures, keeps every example number labelled as a default you can change, and states each proposed change as a hypothesis with the check that would confirm it. It reviews and revises an ICP you already have; it does not build account lists.
+Five skills for B2B founders, product marketers, RevOps and demand generation leads who need to decide who their best customers really are, what those customers say, and how their ideal customer profile (ICP) should change. You give them your ICP, customers, deals, interview notes or metrics; you get a reviewed ICP, interview guides and synthesis, a fit scoring model, buying role hypotheses or a metrics check against your own targets. Every skill works from your own customers, deals, interviews and figures, keeps every example number labelled as a default you can change, and states each proposed change as a hypothesis with the check that would confirm it. It reviews and revises an ICP you already have; it does not build account lists.
 
 ## Skills
 
