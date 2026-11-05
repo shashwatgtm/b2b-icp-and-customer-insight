@@ -1,16 +1,17 @@
 ---
 name: customer-interviews
 description: >
-  Plans and synthesises B2B customer research interviews: guides that test the team's own hypotheses
-  without leading (discovery, validation, churn, win and loss, persona research), and synthesis
-  across many interviews by script, each item counted once per interview, ties named, copied notes
-  flagged, quotes word for word, interviewees by role, changes as hypotheses. For founders, product
-  marketers, researchers and RevOps. Use when someone says "customer interview guide", "interview
-  script", "questions to test our hypotheses", "discovery interview questions", "validation
-  interviews", "churn interview questions", "win loss interviews", "persona research interviews",
-  "synthesise these interview notes", "summarise our customer interviews", "what are customers
-  telling us" or pastes interview notes. Not for case study interviews, prep for one sales call or
-  saving one account.
+  Helps a B2B team decide what to ask customers and what the answers really say. For founders,
+  product marketers, researchers and RevOps. You give it your hypotheses or your interview notes.
+  You get interview guides that test your hypotheses without leading (discovery, validation, churn,
+  win and loss, persona research), or a synthesis across many interviews by script: each item
+  counted once per interview, ties named, copied notes flagged, quotes word for word, interviewees
+  by role and changes stated as hypotheses. Use when someone says "customer interview guide",
+  "interview script", "questions to test our hypotheses", "discovery interview questions",
+  "validation interviews", "churn interview questions", "win loss interviews", "persona research
+  interviews", "synthesise these interview notes", "summarise our customer interviews", "what are
+  customers telling us" or pastes interview notes. Not for case study interviews, prep for one sales
+  call or saving one account.
 ---
 
 # Customer Interviews

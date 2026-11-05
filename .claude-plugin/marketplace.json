@@ -4,13 +4,13 @@
     "name": "Shashwat Ghosh",
     "url": "https://github.com/shashwatgtm"
   },
-  "description": "ICP and customer insight skills for B2B teams by Shashwat Ghosh, Helix GTM Consulting: ICP reviews with metric gaps, customer interview guides and synthesis, fit scoring models and buying role hypotheses.",
+  "description": "ICP and customer insight skills for B2B teams by Shashwat Ghosh, Helix GTM Consulting, to decide who your best customers are and how your ICP should change: ICP reviews with metric gaps, customer interview guides and synthesis, fit scoring models and buying role hypotheses.",
   "plugins": [
     {
       "name": "b2b-icp-and-customer-insight",
       "source": "./plugins/b2b-icp-and-customer-insight",
       "version": "1.0.4",
-      "description": "Review and revise the ICP you have against your customers, deals and figures; plan and synthesise customer interviews that test your hypotheses; build a fit scoring model with labelled example weights; and set buying role hypotheses with validation questions."
+      "description": "For B2B founders, product marketers and RevOps: decide whether you sell to the right customers and how your ICP should change. Give it your ICP, customers, deals, interview notes or metrics; get an ICP review, interview guides and synthesis, a fit scoring model with labelled example weights, buying role hypotheses with validation questions, and a check of your product market fit metrics against your own targets."
     }
   ]
 }
