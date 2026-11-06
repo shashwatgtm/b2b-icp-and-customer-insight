@@ -2,15 +2,16 @@
 name: lead-scoring-model
 description: >
   Helps a B2B team decide which leads and accounts fit its ICP best and which tier each belongs in.
-  For RevOps, demand generation and sales teams. You give it your ICP criteria, and your weights and
-  leads if you have them. You get a fit scoring model (criteria, weights, graded points, the maximum
-  and tiers A to D by script) with your weights or example defaults (critical 25, important 15, nice
-  to have 10) labelled as starting examples, never a benchmark; lead scores where a missing value
-  means incomplete, never 0; and how to validate on closed deals. Fit only: event engagement scoring
-  stays with the events plugin. Use when someone says "lead scoring model", "account fit score",
-  "ICP scoring", "fit score", "score our leads", "score these accounts", "build a scoring model from
-  our ICP", "tier our leads A B C D", "which accounts are tier A", "qualification scorecard" or
-  pastes criteria or leads. Not for event engagement scoring, MQL rules or account lists.
+  For RevOps, demand generation and sales teams. The team gives its ICP criteria, and its weights
+  and leads if it has them; the skill returns a fit scoring model (criteria, weights, graded points,
+  the maximum and tiers A to D by script) with the team's weights or example defaults (critical 25,
+  important 15, nice to have 10) labelled as starting examples, never a benchmark; lead scores where
+  a missing value means incomplete, never 0; and how to validate on closed deals. Fit only: event
+  engagement scoring stays with the events plugin. Use when someone says "lead scoring model",
+  "account fit score", "ICP scoring", "fit score", "score our leads", "score these accounts", "build
+  a scoring model from our ICP", "tier our leads A B C D", "which accounts are tier A",
+  "qualification scorecard" or pastes criteria or leads. Not for event engagement scoring, MQL rules
+  or account lists.
 ---
 
 # Lead Scoring Model

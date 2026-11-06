@@ -12,9 +12,11 @@ Input (JSON object):
 
 Example defaults (starting examples, not a benchmark; replace them): importance weights critical 25, important 15,
 nice to have 10. A criterion with no importance is scored as nice to have and labelled so, never as important.
-Graded points for values listed best first: round half up of weight x (n - 1 - i) / (n - 1); "graded": false gives every
+Graded points for values listed best first: round half up of weight x (n - 1 - i) / (n - 1), to whole points, or to
+2 decimals when the weight has decimals (the best value always scores the full weight); "graded": false gives every
 value the full weight; explicit points are kept as yours. Tiers: A from ceil(0.8 x max), B from ceil(0.6 x max),
-C from ceil(0.4 x max), D below, computed exactly; "tier_percents": [A, B, C] replaces the example bands with yours.
+C from ceil(0.4 x max), D below, computed exactly (in hundredths when points have decimals); "tier_percents": [A, B, C]
+replaces the example bands with yours. A tier whose band starts where the tier above starts is reported as having no scores.
 Tier reading (run 34C): for tiers A, B and C the script prints the fewest criteria at full points that can reach the tier, with one
 example pattern, and any criterion the tier cannot be reached without; copy these lines instead of writing a tier rule by hand
 (not computed above 200,000 combinations of values, and it says so).
@@ -25,7 +27,6 @@ on the list is reported pending your confirmation, with no tier, even when the m
 Exit codes: 0 done; 1 FAIL (0 criteria); 2 bad input. Standard library only; no network; writes no files.
 """
 import json, math, re, sys
-from decimal import Decimal, ROUND_HALF_UP
 from fractions import Fraction
 
 DEFAULTS = {"critical": 25, "important": 15, "nice_to_have": 10}
@@ -51,8 +52,17 @@ def number(v, where):
     return v
 
 
+def exact(v):
+    """A JSON number as an exact fraction: 0.1 is one tenth, not the nearest binary float."""
+    return Fraction(str(v)) if isinstance(v, float) else Fraction(v)
+
+
 def half_up(fr):
-    return int((Decimal(fr.numerator) / Decimal(fr.denominator)).quantize(Decimal("1"), rounding=ROUND_HALF_UP))
+    """Round half up (half away from zero) to a whole number, exactly, for any size of number."""
+    fr = Fraction(fr)
+    if fr < 0:
+        return -half_up(-fr)
+    return (2 * fr.numerator + fr.denominator) // (2 * fr.denominator)
 
 
 def ceil_frac(fr):
@@ -96,12 +106,12 @@ def build(data):
         src_for = lambda k: "your default weight" if k in dw_keys else "example default"
         src = src_for(imp or "nice_to_have")
         if "weight" in c and c["weight"] is not None:
-            w = Fraction(number(c["weight"], f"weight of '{name}'"))
+            w = exact(number(c["weight"], f"weight of '{name}'"))
             wl, il = "your weight", (imp if imp else "importance not given")
         elif imp:
-            w, wl, il = Fraction(dw[imp]), f"{src} for {imp}", imp
+            w, wl, il = exact(dw[imp]), f"{src} for {imp}", imp
         else:
-            w = Fraction(dw["nice_to_have"])
+            w = exact(dw["nice_to_have"])
             wl, il = f"{src} for nice to have", f"importance not given, scored as nice to have ({show(w)}, {src})"
         vals = c.get("values")
         if not isinstance(vals, list) or not vals:
@@ -115,7 +125,7 @@ def build(data):
                 vt = v.get("value")
                 if not isinstance(vt, str) or not vt.strip():
                     raise BadInput(f"criterion '{name}' value {j + 1} has no text")
-                pts, ps = Fraction(number(v.get("points"), f"points for '{vt}'")), "your points"
+                pts, ps = exact(number(v.get("points"), f"points for '{vt}'")), "your points"
                 if pts > w:
                     raise BadInput(f"points for '{vt}' ({show(pts)}) are more than the weight of '{name}' ({show(w)})")
             elif isinstance(v, str) and v.strip():
@@ -123,7 +133,10 @@ def build(data):
                 if not graded or n == 1:
                     pts = w
                 else:
-                    pts = Fraction(half_up(w * (n - 1 - j) / (n - 1)))
+                    raw = w * (n - 1 - j) / (n - 1)
+                    # a whole weight gives whole points; a weight with decimals gives points to 2 decimals,
+                    # so the best value always scores the full weight and never more
+                    pts = Fraction(half_up(raw)) if w.denominator == 1 else Fraction(half_up(raw * 100), 100)
                 ps = "graded" if graded and n > 1 else "full weight"
             else:
                 raise BadInput(f"criterion '{name}' value {j + 1} must be text")
@@ -145,8 +158,10 @@ def build(data):
         if not (100 >= tp[0] > tp[1] > tp[2] > 0):
             raise BadInput(f"'tier_percents' {list(tp)} must fall from A to C, each above 0 and A at most 100")
         tp_yours = True
-    tiers = {k: ceil_frac(mx * Fraction(str(v)) / 100) for k, v in zip("ABC", tp)}
-    res = {"criteria": model, "max": mx, "tiers": tiers, "tier_percents": tp, "tier_percents_yours": tp_yours, "leads": [], "example_keys": sorted(set(DEFAULTS) - dw_keys)}
+    whole = all(c["weight"].denominator == 1 and all(v["points"].denominator == 1 for v in c["values"]) for c in model)
+    step = Fraction(1) if whole else Fraction(1, 100)   # tier starts in whole points, or in hundredths when points have decimals
+    tiers = {k: ceil_frac(mx * Fraction(str(v)) / 100 / step) * step for k, v in zip("ABC", tp)}
+    res = {"criteria": model, "max": mx, "tiers": tiers, "whole": whole, "tier_percents": tp, "tier_percents_yours": tp_yours, "leads": [], "example_keys": sorted(set(DEFAULTS) - dw_keys)}
     leads = data.get("leads") or []
     if not isinstance(leads, list):
         raise BadInput("'leads' must be a list")
@@ -216,13 +231,13 @@ def tier_reading(res):
             if best is None or key < best[0]:
                 best = (key, pick, score)
         if best is None:
-            out.append(f"Tier {tier} (from {th} of {show(mx)} points): no combination of values reaches it.")
+            out.append(f"Tier {tier} (from {show(th)} of {show(mx)} points): no combination of values reaches it.")
             continue
         (full, _), pick, score = best
         at_full = [c["criterion"] for c, v in zip(crit, pick) if c["weight"] > 0 and v["points"] == c["weight"]]
         others = [f"{c['criterion']} = {v['value']}" for c, v in zip(crit, pick) if not (c["weight"] > 0 and v["points"] == c["weight"])]
         example = (", ".join(at_full) + " at full points" if at_full else "no criterion at full points") + ("; " + ", ".join(others) if others else "")
-        out.append(f"Tier {tier} (from {th} of {show(mx)} points): the fewest criteria at full points that reach it: {full} of {len(crit)} (for example {example}: {show(score)} points).")
+        out.append(f"Tier {tier} (from {show(th)} of {show(mx)} points): the fewest criteria at full points that reach it: {full} of {len(crit)} (for example {example}: {show(score)} points).")
         needed = []
         for i, c in enumerate(crit):
             below = [v["points"] for v in c["values"] if v["points"] < c["weight"]]
@@ -232,9 +247,24 @@ def tier_reading(res):
             if rest + max(below) < th:
                 needed.append(c["criterion"])
         if needed:
-            out.append(f"Tier {tier}: needs full points on {', '.join(needed)} (without them the most it can score is below {th}).")
+            out.append(f"Tier {tier}: needs full points on {', '.join(needed)} (without them the most it can score is below {show(th)}).")
         else:
             out.append(f"Tier {tier}: no single criterion is required at full points.")
+    return out
+
+
+def tier_lines(t, mx, whole):
+    """The score range of each tier. With whole points: "Tier B: 39 to 51". With decimals: "Tier B: from 38.5 to below 51.2".
+    A tier whose band starts where the tier above starts has no scores at this maximum, and the line says so."""
+    starts = [("A", t["A"]), ("B", t["B"]), ("C", t["C"]), ("D", Fraction(0))]
+    out = [f"Tier A: {show(t['A'])} to {show(mx)}" if whole else f"Tier A: from {show(t['A'])} to {show(mx)}"]
+    for (name, lo), (_, hi) in zip(starts[1:], starts[:-1]):
+        if lo >= hi:
+            out.append(f"Tier {name}: none at this maximum (its band starts where the tier above starts)")
+        elif whole:
+            out.append(f"Tier {name}: {show(lo)} to {show(hi - 1)}")
+        else:
+            out.append(f"Tier {name}: from {show(lo)} to below {show(hi)}")
     return out
 
 
@@ -245,7 +275,7 @@ def render(res):
         vals = "; ".join(f"{v['value']} = {show(v['points'])}" for v in c["values"])
         out.append(f"| {c['criterion']} | {c['importance_label']} | {show(c['weight'])} ({c['weight_label']}) | {vals} |")
     out += ["", f"Maximum score: {show(mx)}",
-            f"Tier A: {t['A']} to {show(mx)}", f"Tier B: {t['B']} to {t['A'] - 1}", f"Tier C: {t['C']} to {t['B'] - 1}", f"Tier D: 0 to {t['C'] - 1}",
+            *tier_lines(t, mx, res.get("whole", True)),
             (f"Tier bands: {', '.join(show(Fraction(str(x))) + '%' for x in res['tier_percents'])} of the maximum, rounded up (your tier bands)." if res.get("tier_percents_yours")
              else "Tier bands: 80%, 60% and 40% of the maximum, rounded up (example default bands).")]
     out += tier_reading(res)
@@ -279,7 +309,7 @@ def main(argv):
     if len(argv) != 2:
         print("Usage: python lead_score.py FILE.json (or - for standard input)"); return 2
     try:
-        text = sys.stdin.read().lstrip("﻿") if argv[1] == "-" else open(argv[1], encoding="utf-8-sig").read()
+        text = sys.stdin.read().lstrip("\ufeff") if argv[1] == "-" else open(argv[1], encoding="utf-8-sig").read()
     except OSError as e:
         print(f"Bad input: cannot read the file ({e.strerror})"); return 2
 
@@ -287,13 +317,16 @@ def main(argv):
         raise BadInput(f"{c} is not a number this script accepts")
     try:
         res = build(json.loads(text, parse_constant=no_const))
+        report = render(res) if res["criteria"] else ""
     except json.JSONDecodeError as e:
         print(f"Bad input: not valid JSON (line {e.lineno}, column {e.colno})"); return 2
     except BadInput as e:
         print(f"Bad input: {e}"); return 2
+    except (ArithmeticError, ValueError):   # a number too large to work with or to print
+        print("Bad input: a weight, points value or lead value is too large to work with; check the figures"); return 2
     if not res["criteria"]:
         print("FAIL: 0 criteria in the input, so there is no model to build."); return 1
-    print(render(res))
+    print(report)
     return 0
 
 

@@ -178,7 +178,7 @@ def main(argv):
     if len(argv) != 2:
         print("Usage: python icp_gap.py FILE.json (or - for standard input)"); return 2
     try:
-        text = sys.stdin.read().lstrip("﻿") if argv[1] == "-" else open(argv[1], encoding="utf-8-sig").read()
+        text = sys.stdin.read().lstrip("\ufeff") if argv[1] == "-" else open(argv[1], encoding="utf-8-sig").read()
     except OSError as e:
         print(f"Bad input: cannot read the file ({e.strerror})"); return 2
 
@@ -187,13 +187,16 @@ def main(argv):
     try:
         data = json.loads(text, parse_constant=no_const)
         res = analyse(data)
+        report = render(res) if res["compared"] else ""
     except json.JSONDecodeError as e:
         print(f"Bad input: not valid JSON (line {e.lineno}, column {e.colno})"); return 2
     except BadInput as e:
         print(f"Bad input: {e}"); return 2
+    except ArithmeticError:   # a value so large or so small that no percentage can be shown
+        print("Bad input: a value is too large or too small to compare as a percentage; check the figures and their units"); return 2
     if res["compared"] == 0:
         print("FAIL: 0 metrics compared. Give both today's value and the target for at least one metric."); return 1
-    print(render(res))
+    print(report)
     return 0
 
 

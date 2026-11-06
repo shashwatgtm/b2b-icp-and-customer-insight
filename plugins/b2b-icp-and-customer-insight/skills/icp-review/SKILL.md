@@ -2,16 +2,16 @@
 name: icp-review
 description: >
   Helps a B2B team decide whether it is selling to the right customers and how its ICP should
-  change. For founders, product marketers, RevOps and demand generation. You give it the ICP you
-  have, your customers and recent wins and losses. You get today's customers compared with the ICP
-  part by part, metric gaps by script (contract value, sales cycle, win rate, churn, NPS) with
-  labelled example bands, and proposed ICP changes, each a hypothesis with the CRM check that would
-  confirm it, ending in a marked up draft. Use when someone says "review our ICP", "ICP review",
-  "ICP gap analysis", "are we selling to the right customers", "how should our ICP change", "update
-  our ICP from wins and losses", "ICP evolution", "quarterly ICP review", "revise our ideal customer
-  profile" or pastes an ICP with customer or deal data. Not for PMF scorecards against targets
-  (pmf-check), an ICP from scratch or account lists, competitor win and loss analysis, or account
-  saves.
+  change. For founders, product marketers, RevOps and demand generation. The team gives the ICP it
+  has, its customers and recent wins and losses; the skill returns today's customers compared with
+  the ICP part by part, metric gaps by script (contract value, sales cycle, win rate, churn, NPS)
+  with labelled example bands, and proposed ICP changes, each a hypothesis with the CRM check that
+  would confirm it, ending in a marked up draft. Use when someone says "review our ICP", "ICP
+  review", "ICP gap analysis", "compare our customers with our ICP", "are we selling to the right
+  customers", "how should our ICP change", "update our ICP from wins and losses", "ICP evolution",
+  "quarterly ICP review", "revise our ideal customer profile" or pastes an ICP with customer or deal
+  data. Not for PMF scorecards against targets (pmf-check), an ICP from scratch or account lists,
+  competitor win and loss analysis, or account saves.
 ---
 
 # ICP Review

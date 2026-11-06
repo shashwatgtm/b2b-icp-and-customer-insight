@@ -32,7 +32,7 @@ class BadInput(Exception):
 
 
 def norm(s):
-    s = re.sub(r"\s+", " ", s.strip()).strip("\"'“”‘’ ")
+    s = re.sub(r"\s+", " ", s.strip()).strip("\"'\u201c\u201d\u2018\u2019 ")
     return re.sub(r"[.,;:!?]+$", "", s).strip().lower()
 
 
@@ -137,13 +137,20 @@ def tally(data):
         hv = iv.get("hypotheses") or {}
         if not isinstance(hv, dict):
             raise BadInput(f"interview {i} hypotheses must be an object such as {{\"H1\": \"supports\"}}")
+        seen_here = set()
         for h, verdict in hv.items():
             if not isinstance(verdict, str) or verdict.strip().lower() not in VERDICTS:
                 raise BadInput(f"interview {i} hypothesis {h}: the verdict must be exactly one of supports, contradicts, no evidence (got {json.dumps(verdict)})")
             listed = next((x for x in hyp_ids if x.strip().lower() == str(h).strip().lower()), None)
             if hyp_ids and listed is None:
                 raise BadInput(f"interview {i} names hypothesis {json.dumps(h)}, which is not in the 'hypotheses' list ({', '.join(hyp_ids)}); check the id")
+            if not hyp_ids:   # no list given: the same id in other capitals is the same hypothesis
+                listed = next((x for x in hyp_order if x.strip().lower() == str(h).strip().lower()), None)
             h = listed or h
+            key = h.strip().lower()
+            if key in seen_here:
+                raise BadInput(f"interview {i} gives hypothesis {json.dumps(h)} two verdicts; give each hypothesis once per interview")
+            seen_here.add(key)
             if h not in hyp:
                 hyp[h] = {"supports": 0, "contradicts": 0, "no evidence": 0}; hyp_order.append(h)
             hyp[h][verdict.strip().lower()] += 1
@@ -212,7 +219,7 @@ def main(argv):
     if len(argv) != 2:
         print("Usage: python interview_tally.py FILE.json (or - for standard input)"); return 2
     try:
-        text = sys.stdin.read().lstrip("﻿") if argv[1] == "-" else open(argv[1], encoding="utf-8-sig").read()
+        text = sys.stdin.read().lstrip("\ufeff") if argv[1] == "-" else open(argv[1], encoding="utf-8-sig").read()
     except OSError as e:
         print(f"Bad input: cannot read the file ({e.strerror})"); return 2
 

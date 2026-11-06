@@ -30,7 +30,15 @@ In Claude Code:
 
 ## What it runs
 
-The skills run inside Claude. Six small Python scripts (standard library only), each tested before release, do the exact parts: icp_gap.py (metric gaps and bands), fit_count.py (how many customers can fit several ICP parts at once), interview_tally.py (counts once per interview and the hypothesis tally), lead_score.py (weights, points, tiers, a tier reading and lead scores), role_check.py (a text check on role drafts) and pmf_score.py (metrics against your own targets). They read only the JSON or text files Claude gives them, use no network and write no files. When web tools are available, a skill may open your own company's public pages to read your product in your words, with link and date. Nothing is published, sent or written to a CRM.
+The skills run inside Claude. Six small Python scripts (standard library only), each run on realistic, empty, wrong type and very large inputs before release, do the exact parts: icp_gap.py (metric gaps and bands), fit_count.py (how many customers can fit several ICP parts at once), interview_tally.py (counts once per interview and the hypothesis tally), lead_score.py (weights, points, tiers, a tier reading and lead scores), role_check.py (a text check on role drafts) and pmf_score.py (metrics against your own targets). They read only the JSON or text files Claude gives them, use no network and write no files. When web tools are available, a skill may open your own company's public pages to read your product in your words, with link and date. Nothing is published, sent or written to a CRM.
+
+## What changed in 1.0.5
+
+- Skill descriptions say in plain words which decision each skill helps with, what you give it and what you get back.
+- lead_score.py: a weight with decimals (12.5) now gives the best value the full weight, never more or less, and tier starts are shown in hundredths when points have decimals; a tier that has no scores at a very small maximum says so.
+- interview_tally.py refuses one hypothesis given two verdicts in the same interview, and counts "H1" and "h1" as one hypothesis when no list of ids is given.
+- icp_gap.py, pmf_score.py and lead_score.py refuse a value too large or too small to compare with a clear message instead of stopping; pmf_score.py says why LTV to CAC was not scored when CAC is 0.
+- role_check.py checks the same things with short, plain text patterns (no look ahead or look behind).
 
 ## What changed in 1.0.1
 

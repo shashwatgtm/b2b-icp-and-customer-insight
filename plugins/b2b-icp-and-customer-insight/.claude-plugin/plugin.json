@@ -1,7 +1,7 @@
 {
   "name": "b2b-icp-and-customer-insight",
   "displayName": "B2B ICP and Customer Insight",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "For B2B founders, product marketers, RevOps and demand generation: decide whether you sell to the right customers, how your ICP should change, who champions and signs, which leads fit best, and how far you are from your product market fit targets. Review the ICP you already have against today's customers, deals and figures, with metric gaps computed by script and every proposed change a hypothesis with its test; plan customer interviews that test your own hypotheses and synthesise many interviews with each item counted once per interview; build a lead or account fit scoring model with labelled example weights you can change; set buying role hypotheses with validation questions; and check product market fit metrics against your own targets.",
   "author": {
     "name": "Shashwat Ghosh",
@@ -10,6 +10,7 @@
   "homepage": "https://tools.gtmhelix.com/plugins/b2b-icp-and-customer-insight/",
   "repository": "https://github.com/shashwatgtm/b2b-icp-and-customer-insight",
   "license": "MIT",
+  "icon": "./.claude-plugin/icon.png",
   "keywords": [
     "icp",
     "ideal-customer-profile",

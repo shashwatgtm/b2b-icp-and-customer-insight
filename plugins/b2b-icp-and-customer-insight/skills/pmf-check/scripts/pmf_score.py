@@ -167,7 +167,7 @@ def main(argv):
     if len(argv) != 2:
         print("Usage: python pmf_score.py FILE.json (or - for standard input)"); return 2
     try:
-        text = sys.stdin.read().lstrip("﻿") if argv[1] == "-" else open(argv[1], encoding="utf-8-sig").read()
+        text = sys.stdin.read().lstrip("\ufeff") if argv[1] == "-" else open(argv[1], encoding="utf-8-sig").read()
     except OSError as e:
         print(f"Bad input: cannot read the file ({e.strerror})"); return 2
 
@@ -175,13 +175,18 @@ def main(argv):
         raise BadInput(f"{c} is not a number this script accepts")
     try:
         res = check(json.loads(text, parse_constant=no_const))
+        report = render(res) if res["scored"] else ""
     except json.JSONDecodeError as e:
         print(f"Bad input: not valid JSON (line {e.lineno}, column {e.colno})"); return 2
     except BadInput as e:
         print(f"Bad input: {e}"); return 2
+    except ArithmeticError:   # a value so large or so small that no percentage can be shown
+        print("Bad input: a value is too large or too small to compare as a percentage; check the figures and their units"); return 2
     if res["scored"] == 0:
-        print("FAIL: 0 dimensions scored. Give at least one metric together with your own target for it."); return 1
-    print(render(res))
+        reasons = [f"{r['name']}: {r['text']}" for r in res["rows"] if r["dimension"] == "ltv_cac" and r["status"] == "missing" and "CAC" in r["text"]]
+        print("FAIL: 0 dimensions scored. Give at least one metric together with your own target for it."
+              + (" " + "; ".join(reasons) + "." if reasons else "")); return 1
+    print(report)
     return 0
 
 

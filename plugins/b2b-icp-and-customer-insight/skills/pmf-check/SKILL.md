@@ -2,10 +2,10 @@
 name: pmf-check
 description: >
   Helps a B2B team decide how far its product market fit metrics are from its own targets. For
-  founders, product marketers and RevOps. You give it your metrics and targets: churn, NPS in
+  founders, product marketers and RevOps. The team gives its metrics and targets: churn, NPS in
   points, LTV to CAC, retention, activation (or an adoption measure for services, connectivity or
-  investment businesses) and any measure you track. You get each compared by script, the dimensions
-  behind target ranked, and missing values or targets reported as not scored, with no published
+  investment businesses) and any measure it tracks; the skill compares each by script, ranks the
+  dimensions behind target, and reports missing values or targets as not scored, with no published
   range, benchmark or stage label; pasted customer feedback is kept word for word and sorted into
   story, result, claim or friction. Use when someone says "PMF check", "product market fit check",
   "are we at product market fit", "PMF scorecard", "check our metrics against our targets", "how far

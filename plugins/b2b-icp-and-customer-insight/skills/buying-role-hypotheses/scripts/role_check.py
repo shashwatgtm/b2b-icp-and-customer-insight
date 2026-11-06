@@ -11,8 +11,43 @@ Exit codes: 0 clean; 1 problems found; 2 nothing to read. Standard library only;
 import re, sys
 
 DASH = re.compile("[\u2012\u2013\u2014\u2015]| -{1,2} ")
-# a word with lower case letters on a side of a run of 2 or 3 capitals (securIT, mAInager), and "infrastructure" with letters glued on
-DAMAGED = [re.compile(r"\b[a-z]+[A-Z]{2,3}[A-Za-z]*|\b[A-Za-z]*[a-z][A-Z]{2,3}[a-z]+\w*"), re.compile(r"\binfrastructure(?!s\b)[a-z]+")]
+# A damaged label: lower case letters before a run of 2 or 3 capitals (securIT), or lower case letters on both sides of
+# such a run (mAInager), or "infrastructure" with letters glued on (infrastructurey; the plural "infrastructures" is fine).
+# Each pattern is short and plain, with no look ahead or look behind.
+CAPS_AFTER_LOWER = re.compile(r"\b[a-z]+[A-Z]{2,3}[A-Za-z]*")
+CAPS_INSIDE_WORD = re.compile(r"\b[A-Za-z]*[a-z][A-Z]{2,3}[a-z]+\w*")
+INFRA_GLUED = re.compile(r"\binfrastructure[a-z]+")
+
+
+def first_of(patterns, line):
+    """Matches of several patterns, left to right, the earlier pattern first at the same place, never overlapping:
+    the same matches one pattern written as an alternation (a|b) gives."""
+    found = sorted((m.start(), k, m.end(), m.group(0)) for k, rx in enumerate(patterns) for m in rx.finditer(line))
+    out, end = [], -1
+    for start, _, stop, text in found:
+        if start >= end:
+            out.append(text)
+            end = stop
+    return out
+
+
+def damaged_labels(line):
+    caps = first_of([CAPS_AFTER_LOWER, CAPS_INSIDE_WORD], line)
+    infra = [m.group(0) for m in INFRA_GLUED.finditer(line) if not plural_word(line, m)]
+    return caps + infra
+
+
+def plural_word(line, m):
+    """True for the whole word "infrastructures" (a plural, not a damaged label)."""
+    after = line[m.end():m.end() + 1]
+    return m.group(0) == "infrastructures" and not (after.isalnum() or after == "_")
+
+
+def blank_hyphen_cells(row):
+    """In a table row, a cell holding only one or two hyphens (between two pipes) is an empty cell, not a dash."""
+    parts = row.split("|")
+    cells_between = [" " if p.strip() in ("-", "--") else p for p in parts[:-1]]
+    return "|".join(cells_between + parts[-1:])
 KNOWN = {"ITeS", "SaaS", "PaaS", "IaaS", "iPaaS", "CPaaS", "eKYC", "iOS", "macOS", "vCISO", "vCIO", "eSIM", "eUICC", "mTLS", "gRPC", "iPhone", "iPad", "eSOC"}
 EMPTY = {"", "n/a", "na", "-", "none", "tbd", "?"}
 
@@ -27,14 +62,13 @@ def check_text(text):
     for i, line in enumerate(lines, 1):
         body = line[len(line) - len(line.lstrip()):] if line.lstrip().startswith("- ") else line   # an indented bullet is not a dash
         body = body[2:] if body.startswith("- ") else body
-        body = re.sub(r"\|\s*-{1,2}\s*(?=\|)", "| ", body) if body.lstrip().startswith("|") else body   # a lone hyphen cell is empty, not a dash
+        body = blank_hyphen_cells(body) if body.lstrip().startswith("|") else body   # a lone hyphen cell is empty, not a dash
         if DASH.search(body):
             problems.append(f"line {i}: long or short dash")
-        for rx in DAMAGED:
-            for m in rx.finditer(line):
-                if m.group(0) in KNOWN:
-                    continue
-                problems.append(f"line {i}: damaged label '{m.group(0)}' (a part word replace)")
+        for label in damaged_labels(line):
+            if label in KNOWN:
+                continue
+            problems.append(f"line {i}: damaged label '{label}' (a part word replace)")
     i = 0
     while i < len(lines):
         line = lines[i]
@@ -66,7 +100,7 @@ def main(argv):
     total, bad = 0, 0
     for a in argv[1:]:
         try:
-            text = sys.stdin.read().lstrip("﻿") if a == "-" else open(a, encoding="utf-8-sig").read()
+            text = sys.stdin.read().lstrip("\ufeff") if a == "-" else open(a, encoding="utf-8-sig").read()
         except OSError as e:
             print(f"Cannot read {a}: {e.strerror}"); return 2
         except UnicodeDecodeError:

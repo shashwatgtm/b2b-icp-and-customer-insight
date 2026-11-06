@@ -2,16 +2,16 @@
 name: customer-interviews
 description: >
   Helps a B2B team decide what to ask customers and what the answers really say. For founders,
-  product marketers, researchers and RevOps. You give it your hypotheses or your interview notes.
-  You get interview guides that test your hypotheses without leading (discovery, validation, churn,
-  win and loss, persona research), or a synthesis across many interviews by script: each item
-  counted once per interview, ties named, copied notes flagged, quotes word for word, interviewees
-  by role and changes stated as hypotheses. Use when someone says "customer interview guide",
-  "interview script", "questions to test our hypotheses", "discovery interview questions",
-  "validation interviews", "churn interview questions", "win loss interviews", "persona research
-  interviews", "synthesise these interview notes", "summarise our customer interviews", "what are
-  customers telling us" or pastes interview notes. Not for case study interviews, prep for one sales
-  call or saving one account.
+  product marketers, researchers and RevOps. The team gives its hypotheses or its interview notes;
+  the skill returns interview guides that test those hypotheses without leading (discovery,
+  validation, churn, win and loss, persona research), or a synthesis across many interviews by
+  script: each item counted once per interview, ties named, copied notes flagged, quotes word for
+  word, interviewees by role and changes stated as hypotheses. Use when someone says "customer
+  interview guide", "interview script", "questions to test our hypotheses", "discovery interview
+  questions", "validation interviews", "churn interview questions", "win loss interviews", "persona
+  research interviews", "synthesise these interview notes", "summarise our customer interviews",
+  "what are customers telling us", "patterns across our interviews" or pastes interview notes. Not
+  for case study interviews, prep for one sales call or saving one account.
 ---
 
 # Customer Interviews
