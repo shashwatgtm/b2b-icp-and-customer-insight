@@ -9,7 +9,7 @@
     {
       "name": "b2b-icp-and-customer-insight",
       "source": "./plugins/b2b-icp-and-customer-insight",
-      "version": "1.0.6",
+      "version": "1.0.7",
       "description": "For B2B founders, product marketers and RevOps: decide whether you sell to the right customers and how your ICP should change. Give it your ICP, customers, deals, interview notes or metrics; get an ICP review, interview guides and synthesis, a fit scoring model with labelled example weights, buying role hypotheses with validation questions, and a check of your product market fit metrics against your own targets."
     }
   ]
