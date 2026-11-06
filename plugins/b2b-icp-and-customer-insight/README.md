@@ -32,6 +32,12 @@ In Claude Code:
 
 The skills run inside Claude. Six small Python scripts (standard library only), each run on realistic, empty, wrong type and very large inputs before release, do the exact parts: icp_gap.py (metric gaps and bands), fit_count.py (how many customers can fit several ICP parts at once), interview_tally.py (counts once per interview and the hypothesis tally), lead_score.py (weights, points, tiers, a tier reading and lead scores), role_check.py (a text check on role drafts) and pmf_score.py (metrics against your own targets). They read only the JSON or text files Claude gives them, use no network and write no files. When web tools are available, a skill may open your own company's public pages to read your product in your words, with link and date. Nothing is published, sent or written to a CRM.
 
+## What changed in 1.0.6
+
+- Tested by behaviour: an eval suite in evals/ runs real prompts with and without the plugin (see "How this plugin is tested").
+- Fixes from that testing: customer-interviews never asks a question that presumes a cost ("What, if anything, did that take from the team?") and keeps each hypothesis in its own words and numbers; icp-review never derives a figure you did not give from an assumed definition (such as deals decided from a win rate).
+- The explicit "icon" field is removed from plugin.json; the icon in .claude-plugin/ is still picked up by default.
+
 ## What changed in 1.0.5
 
 - Skill descriptions say in plain words which decision each skill helps with, what you give it and what you get back.
@@ -47,6 +53,9 @@ Removed the optional reply checker, its steps in each skill and its end of turn 
 ## Examples
 
 The worked examples inside the skills use hypothetical, unnamed companies and hypothetical figures only; no real company or person is described.
+
+## How this plugin is tested
+evals/ holds 10 cases in the `claude plugin eval` layout: for each of the 5 skills, one realistic B2B request that should use the skill and one near miss that should not. Every case has a judged rubric (what the skill promises, plus no invented facts or figures, no software recommendations, no client names, plain English and no dashes used as punctuation), a regex check for dashes, and a check that the skill did or did not run. In the final run (6 November 2026, 2 runs per case with and without the plugin, Sonnet as agent and judge, no shell tools), the mean case score was 0.75 with the plugin and 0.36 without it; on the 5 cases the skills are built for it was 0.90 with and 0.15 without. Each skill ran on all 10 of its trigger runs and on none of the 20 near miss runs. Runs where every graded check passed: 10 of 20 with the plugin, 3 of 20 without. The cases were run by a headless runner that applies the same scoring to these files, because `claude plugin eval` could not sign in its child runs on the test machine.
 
 ## Privacy
 

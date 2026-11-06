@@ -4,13 +4,14 @@
 1. Opening: who you are, why you asked, how long, permission to take notes, that there are no right answers.
 2. Context: their role, their team, how the job is done today, in their words.
 3. Core: the questions that test the hypotheses, asked about past events ("Tell me about the last time ..."), not opinions about the future.
-4. Probes: "What happened next?", "How did you decide?", "What did that cost you?", "Who else was involved?", then silence: let the answer finish.
+4. Probes: "What happened next?", "How did you decide?", "What, if anything, did that take from the team?", "Who else was involved?", then silence: let the answer finish.
 5. Closing: anything we should have asked, who else to speak to, permission to follow up.
 
 ## Question rules
 - Open questions about past behaviour; one question at a time.
 - Never name the product's feature in the question; never lead ("Wouldn't it be great if ...").
-- Ask for the last real example, the workaround in use, and what it costs (time, money, risk), in the interviewee's own measures.
+- Ask for the last real example, the workaround in use, and what it took (time, money, risk), in the interviewee's own measures, without presuming it cost anything: "What, if anything, did that take from the team?", never "What did that cost you?".
+- Keep each hypothesis's own words and numbers: never restate them in other units ("more than a week" is not "more than five working days") or add a threshold the team did not give.
 - Ask who else was involved, to learn the buying roles without asking for names.
 - The interviewer never pitches during a research interview.
 

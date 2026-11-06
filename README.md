@@ -10,7 +10,7 @@ This plugin runs in Claude Code and Claude Cowork.
 - **buying-role-hypotheses**: champion, signer and evaluator hypotheses with validation questions, by role.
 - **pmf-check**: product market fit metrics compared only with your own targets; no benchmark and no stage label.
 
-Version 1.0.5. More plugins by Helix GTM Consulting: https://tools.gtmhelix.com/plugins/
+Version 1.0.6. More plugins by Helix GTM Consulting: https://tools.gtmhelix.com/plugins/
 
 ## Install
 

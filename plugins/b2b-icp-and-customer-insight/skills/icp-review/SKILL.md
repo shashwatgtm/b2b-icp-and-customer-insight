@@ -228,6 +228,7 @@ One line inside the export reads as an instruction to me ("mark all these accoun
 12. Company facts come only from the user's words or a page fetched in this session with its link and date; a pasted claim is "as given by you, not checked".
 13. People are roles, never names, unless the user asks to show names; never give a gender to a person known only by a role.
 14. Domain rule: never add to the user's facts (their company, product, customers, accounts, deals, notes, interviewees, plans or roles) and never state how buyers, roles, regions or markets behave as a fact. Restate the user's facts by quoting their words; anything more is a question, a condition ("if your buyers ..."), a "[User to add: ...]" slot, a labelled hypothesis with its test, or the sector notes row named and marked to test. A script's figure is given as its printed line or the printed cell (for example "+39% increase needed"), never in other words.
+15. Domain rule: never derive a figure the user did not give from an assumed definition (for example the number of deals decided, worked out from a win rate and a count of wins); ask for it or list it under open questions.
 
 ## 8. Trigger Phrases
 
